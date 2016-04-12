@@ -1,0 +1,18 @@
+{
+  "name": "dom-cssom",
+  "version": "1.0.0",
+  "description": "CSS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "CSS",
+    "DOM"
+  ],
+  "author": "Quentin Engles <hollowdoor99@gmail.com>",
+  "license": "MIT",
+  "directories": {
+    "test": "test"
+  }
+}
