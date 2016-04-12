@@ -3,6 +3,11 @@ dom-cssom
 
 Set your CSS with javscript.
 
+Install
+-------
+
+`npm install --save dom-cssom`
+
 A simple example
 ----------------
 
@@ -45,6 +50,8 @@ cssom.add('.test', {
     });
 });
 ```
+
+You would probably have to use browserify, or some other javascript compiler to get the above script to work.
 
 Constructor
 -----------
