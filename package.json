@@ -14,5 +14,13 @@
   "license": "MIT",
   "directories": {
     "test": "test"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hollowdoor/dom_cssom.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hollowdoor/dom_cssom/issues"
+  },
+  "homepage": "https://github.com/hollowdoor/dom_cssom#readme"
 }
