@@ -157,7 +157,7 @@ This is the same as the `remove` method, but removes all styles.
 
 The nuclear option. Removes all media listeners, and removes the style tag created during instantiation.
 
-The instance of `dom-css` is unusable after a call to `destroy`.
+The instance of `dom-cssom` is unusable after a call to `destroy`.
 
 Rules
 -----
@@ -169,6 +169,8 @@ An array of rules is returned from the `find` method. Each of these rules has th
 -	style (Pretty much the same as a style object on a DOM node.)
 
 You can set styles with a style object that belongs to a rule as well just like the style object found on a DOM node.
+
+**The rules returned from the find method are different than what you get from regular cssRules.**
 
 Static Properties
 -----------------
@@ -185,6 +187,6 @@ This module uses the CSSOM which is only uniformly supported in the most modern 
 About
 -----
 
-`dom-css` is an attempt at making unintrustive styling easier.
+`dom-cssom` is an attempt at making unintrustive styling easier.
 
 Using this module is the same as writing embedded styles only with javascript. That is to say that it literally creates an embedded style tag. So use it like you do embedded styles.
