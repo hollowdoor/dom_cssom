@@ -156,8 +156,8 @@ domCSSOM.prototype = {
                 this._mediaListeners[i].listener
             );
         }
-
-        domCSSOM.document.head.removeChild(this.dom);
+        
+        this.dom.parentNode.removeChild(this.dom);
     },
     appendTo: function(element){
         var el = element;
