@@ -172,6 +172,20 @@ You can set styles with a style object that belongs to a rule as well just like 
 
 **The rules returned from the find method are different than what you get from regular cssRules.**
 
+### cssom.appendTo(element) -> this
+
+Append the style created to a different element. Element can be a DOM element, or a selector string that will work with `document.querySelector`.
+
+By default `dom-cssom` appends the style to the head.
+
+Perhaps you are on the cutting edge, and added the scoped attribute.
+
+```javascript
+var cssom = domCSSOM({scoped: true}).appendTo('#some-id');
+```
+
+The styles would apply to the location of the style node if the browser supports scoped styles tags.
+
 Static Properties
 -----------------
 

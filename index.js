@@ -1,10 +1,10 @@
-/*
+/*/*
 git remote add origin https://github.com/hollowdoor/dom_cssom.git
 git push -u origin master
 */
-function domCSS(selector, attr){
+function domCSSOM(selector, attr){
 
-    var doc = domCSS.document;
+    var doc = domCSSOM.document, self = this;
 
     if(typeof selector === 'string'){
 
@@ -18,6 +18,7 @@ function domCSS(selector, attr){
         this.dom = doc.createElement('style');
         doc.head.appendChild(this.dom);
         attr = selector || {};
+        this.dom.setAttribute('type', 'text/css');
     }
 
     this.sheet = this.dom.sheet;
@@ -30,12 +31,24 @@ function domCSS(selector, attr){
     for(var n in attr){
         this.dom.setAttribute(n, attr[n]);
     }
+
+    this.attr = attr;
+
+    Object.defineProperty(this, 'contents', {
+        get: function(){
+            var len = self.sheet.cssRules.length, str = '';
+            for(var i=0; i<len; i++){
+                str += self.sheet.cssRules[i].cssText + ' ';
+            }
+            return str;
+        }
+    });
 }
 
-domCSS.document = document || null;
+domCSSOM.document = document || null;
 
-domCSS.prototype = {
-    constructor: domCSS,
+domCSSOM.prototype = {
+    constructor: domCSSOM,
     add: function(selector, attrs){
 
         var rules = '', selName, methodName;
@@ -95,6 +108,7 @@ domCSS.prototype = {
     },
     media: function(cond, cb){
         var mql = window.matchMedia(cond), css = this, count = null, first;
+
         queryListener(mql);
 
         if(!mql['addListener']) return this;
@@ -143,12 +157,48 @@ domCSS.prototype = {
             );
         }
 
-        document.head.removeChild(this.dom);
+        domCSSOM.document.head.removeChild(this.dom);
+    },
+    appendTo: function(element){
+        var el = element;
+        if(typeof el === 'string'){
+            try{
+                el = domCSSOM.document.querySelector(element);
+            }catch(e){
+                throw new TypeError(element + ' is not a valid CSS selector.');
+            }
+        }
+        var self = this;
+        setTimeout(function(){
+
+            var rules = [], len = self.dom.sheet.cssRules.length;
+            console.log('len ', len)
+            //this.sheet = this.dom.sheet;
+            //this.lastIndex = this.sheet.cssRules.length;
+            for(var i=0; i<len; i++){
+                rules.push(self.dom.sheet.cssRules[i].cssText);
+            }
+            console.log('rules ',rules)
+        })
+
+        el.appendChild(this.dom);
+        this.sheet = this.dom.sheet;
+        this.lastIndex = this.sheet.cssRules.length;
+        return this;
+    },
+    toString: function(){
+        var attr = '', contents = '';
+        for(var n in this.attr){
+            attr += n + '="' + this.attr + '"';
+        }
+        return '<script '+attr+'>'
+        + this.contents
+        + '<script>';
     }
 };
 
-module.exports = function domCSSFactory(css){
-    return new domCSS();
+module.exports = function domCSSOMFactory(selector, attr){
+    return new domCSSOM(selector, attr);
 };
 
 function getRuleIndexes(sheet, criteria){
